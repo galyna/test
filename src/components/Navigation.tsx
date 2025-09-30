@@ -8,6 +8,7 @@ export default function Navigation() {
   
   const links = [
     { href: '/', label: 'Dashboard' },
+    { href: '/kanban', label: 'Kanban Board' },
     { href: '/tasks', label: 'Task List' },
     { href: '/tasks/create', label: 'Create Task' },
     { href: '/users', label: 'User Management' }

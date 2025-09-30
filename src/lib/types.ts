@@ -18,6 +18,7 @@ export interface Task {
   assigneeId: string;
   createdDate: string;
   dueDate?: string;
+  blockedBy?: string[]; // Array of task IDs that block this task
 }
 
 export interface TaskHistory {

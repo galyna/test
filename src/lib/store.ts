@@ -286,3 +286,74 @@ export function getTaskStatistics() {
 export function getUserTaskCount(userId: string): number {
   return tasks.filter(t => t.assigneeId === userId).length;
 }
+
+// Task dependencies
+export function addDependency(taskId: string, blockerTaskId: string): boolean {
+  const task = tasks.find(t => t.id === taskId);
+  const blockerTask = tasks.find(t => t.id === blockerTaskId);
+  
+  if (!task || !blockerTask || taskId === blockerTaskId) return false;
+  
+  // Check for circular dependencies
+  if (wouldCreateCircularDependency(taskId, blockerTaskId)) return false;
+  
+  if (!task.blockedBy) {
+    task.blockedBy = [];
+  }
+  
+  if (!task.blockedBy.includes(blockerTaskId)) {
+    task.blockedBy.push(blockerTaskId);
+    return true;
+  }
+  
+  return false;
+}
+
+export function removeDependency(taskId: string, blockerTaskId: string): boolean {
+  const task = tasks.find(t => t.id === taskId);
+  
+  if (!task || !task.blockedBy) return false;
+  
+  const index = task.blockedBy.indexOf(blockerTaskId);
+  if (index > -1) {
+    task.blockedBy.splice(index, 1);
+    return true;
+  }
+  
+  return false;
+}
+
+function wouldCreateCircularDependency(taskId: string, blockerTaskId: string): boolean {
+  // Check if blockerTask depends on taskId (directly or indirectly)
+  const visited = new Set<string>();
+  
+  function checkDependencies(currentTaskId: string): boolean {
+    if (currentTaskId === taskId) return true;
+    if (visited.has(currentTaskId)) return false;
+    
+    visited.add(currentTaskId);
+    
+    const currentTask = tasks.find(t => t.id === currentTaskId);
+    if (!currentTask?.blockedBy) return false;
+    
+    return currentTask.blockedBy.some(blockerId => checkDependencies(blockerId));
+  }
+  
+  return checkDependencies(blockerTaskId);
+}
+
+export function getBlockingTasks(taskId: string): Task[] {
+  const task = tasks.find(t => t.id === taskId);
+  if (!task?.blockedBy) return [];
+  
+  return tasks.filter(t => task.blockedBy?.includes(t.id));
+}
+
+export function getBlockedTasks(taskId: string): Task[] {
+  return tasks.filter(t => t.blockedBy?.includes(taskId));
+}
+
+export function isTaskBlocked(taskId: string): boolean {
+  const blockingTasks = getBlockingTasks(taskId);
+  return blockingTasks.some(t => t.status !== 'Done');
+}
