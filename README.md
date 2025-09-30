@@ -1,36 +1,120 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Task Management Application
 
-## Getting Started
+A full-featured task management application built with Next.js, React, TypeScript, and Tailwind CSS.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Dashboard**: View summary statistics and recent activity
+- **Task List**: Browse, filter, search, and sort all tasks
+- **Create Task**: Add new tasks with validation
+- **Task Details**: View, edit, and delete tasks with history tracking
+- **User Management**: Manage users with role assignments
+
+## Prerequisites
+
+- Node.js 18.x or higher
+- npm or yarn
+
+## Setup Instructions
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/galyna/test.git
+   cd test
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Run the development server**
+   ```bash
+   npm run dev
+   ```
+
+4. **Open your browser**
+   Navigate to [http://localhost:3000](http://localhost:3000)
+
+## Available Scripts
+
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm start` - Start production server
+- `npm run lint` - Run ESLint
+
+## Tech Stack
+
+- **Framework**: Next.js 15 (App Router)
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **State Management**: In-memory storage (client-side)
+
+## Application Structure
+
+```
+src/
+├── app/                    # Next.js App Router pages
+│   ├── page.tsx           # Dashboard
+│   ├── tasks/
+│   │   ├── page.tsx       # Task List
+│   │   ├── create/
+│   │   │   └── page.tsx   # Create Task
+│   │   └── [id]/
+│   │       └── page.tsx   # Task Detail
+│   └── users/
+│       └── page.tsx       # User Management
+├── components/
+│   └── Navigation.tsx     # Navigation component
+└── lib/
+    ├── types.ts          # TypeScript types
+    └── store.ts          # In-memory data store
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Sample Data
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The application comes pre-loaded with:
+- 4 users (John Developer, Sarah Designer, Mike QA, Lisa Manager)
+- 8 tasks with various statuses and priorities
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Features Overview
 
-## Learn More
+### Dashboard
+- Total tasks count
+- Completed tasks count
+- In-progress tasks count
+- Last 5 recent activities
 
-To learn more about Next.js, take a look at the following resources:
+### Task List
+- Search functionality (min 3 characters)
+- Filter by status (All, To Do, In Progress, Done)
+- Sortable by Created Date and Priority
+- Click row to view details
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Create Task
+- Form validation
+- Character limits (Title: 100, Description: 500)
+- Due date validation (no past dates)
+- Auto-generated task IDs
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Task Detail
+- View mode with all task information
+- Edit mode with validation
+- Delete with confirmation
+- Task history tracking
+- Status change tracking
 
-## Deploy on Vercel
+### User Management
+- Add new users with validation
+- Inline editing
+- Delete protection (users with tasks can't be deleted)
+- Task count per user
+- Email validation
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Data Persistence
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Note: This application uses in-memory storage. All data will be reset when the application restarts. For production use, integrate with a database (e.g., PostgreSQL, MongoDB).
+
+## License
+
+MIT
