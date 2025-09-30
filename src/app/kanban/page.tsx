@@ -46,7 +46,7 @@ function TaskCard({ task, getUserName, isDragging = false }: TaskCardProps) {
 
   return (
     <div
-      className={`bg-white rounded-lg shadow-md p-4 mb-3 cursor-move hover:shadow-lg transition-shadow ${getPriorityColor(task.priority)} ${
+      className={`bg-white rounded-lg shadow-md p-3 sm:p-4 mb-2 sm:mb-3 cursor-move hover:shadow-lg transition-shadow ${getPriorityColor(task.priority)} ${
         isDragging ? 'opacity-50' : ''
       } ${blocked ? 'ring-2 ring-red-300' : ''}`}
       onClick={(e) => {
@@ -167,11 +167,11 @@ export default function KanbanBoard() {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold text-gray-800">Kanban Board</h1>
-        <div className="text-sm text-gray-600">
-          <span className="font-semibold">{tasks.length}</span> total tasks
+    <div className="container mx-auto px-2 sm:px-4 py-4 sm:py-8">
+      <div className="flex justify-between items-center mb-4 sm:mb-6">
+        <h1 className="text-2xl sm:text-3xl font-bold text-gray-800">Kanban Board</h1>
+        <div className="text-xs sm:text-sm text-gray-600">
+          <span className="font-semibold">{tasks.length}</span> tasks
         </div>
       </div>
 
@@ -181,7 +181,7 @@ export default function KanbanBoard() {
         onDragStart={handleDragStart}
         onDragEnd={handleDragEnd}
       >
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-6">
           {columns.map(column => {
             const columnTasks = getTasksByStatus(column.id);
             
@@ -191,9 +191,9 @@ export default function KanbanBoard() {
                 id={column.id}
                 className="flex flex-col"
               >
-                <div className={`${column.color} rounded-lg p-4 mb-4`}>
+                <div className={`${column.color} rounded-lg p-3 sm:p-4 mb-3 sm:mb-4`}>
                   <div className="flex justify-between items-center">
-                    <h2 className="font-bold text-gray-800">{column.title}</h2>
+                    <h2 className="text-sm sm:text-base font-bold text-gray-800">{column.title}</h2>
                     <span className="bg-white text-gray-700 px-2 py-1 rounded-full text-xs font-semibold">
                       {columnTasks.length}
                     </span>
@@ -202,7 +202,7 @@ export default function KanbanBoard() {
 
                 <div
                   data-droppable-id={column.id}
-                  className="flex-1 bg-gray-50 rounded-lg p-4 min-h-[500px] transition-colors"
+                  className="flex-1 bg-gray-50 rounded-lg p-2 sm:p-4 min-h-[300px] sm:min-h-[500px] transition-colors"
                   onDragOver={(e) => {
                     e.preventDefault();
                     e.currentTarget.classList.add('bg-blue-50', 'ring-2', 'ring-blue-300');

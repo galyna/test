@@ -91,8 +91,8 @@ export default function CreateTask() {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8 max-w-2xl">
-      <h1 className="text-3xl font-bold text-gray-800 mb-6">Create New Task</h1>
+    <div className="container mx-auto px-2 sm:px-4 py-4 sm:py-8 max-w-2xl">
+      <h1 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-4 sm:mb-6">Create New Task</h1>
 
       {successMessage && (
         <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
@@ -100,7 +100,7 @@ export default function CreateTask() {
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow-md p-6 space-y-6">
+      <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow-md p-4 sm:p-6 space-y-4 sm:space-y-6">
         {/* Title */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -196,17 +196,17 @@ export default function CreateTask() {
         </div>
 
         {/* Buttons */}
-        <div className="flex gap-4 pt-4">
+        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-4">
           <button
             type="submit"
-            className="flex-1 bg-blue-600 text-white px-4 py-2 rounded-md font-semibold hover:bg-blue-700 transition-colors"
+            className="flex-1 bg-blue-600 text-white px-4 py-3 sm:py-2 rounded-md font-semibold hover:bg-blue-700 transition-colors"
           >
             Create Task
           </button>
           <button
             type="button"
             onClick={handleCancel}
-            className="flex-1 bg-gray-300 text-gray-700 px-4 py-2 rounded-md font-semibold hover:bg-gray-400 transition-colors"
+            className="flex-1 bg-gray-300 text-gray-700 px-4 py-3 sm:py-2 rounded-md font-semibold hover:bg-gray-400 transition-colors"
           >
             Cancel
           </button>

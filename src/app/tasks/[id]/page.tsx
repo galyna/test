@@ -187,18 +187,18 @@ export default function TaskDetail() {
   const isBlocked = isTaskBlocked(taskId);
 
   return (
-    <div className="container mx-auto px-4 py-8 max-w-4xl">
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold text-gray-800">Task Details</h1>
+    <div className="container mx-auto px-2 sm:px-4 py-4 sm:py-8 max-w-4xl">
+      <div className="flex justify-between items-center mb-4 sm:mb-6">
+        <h1 className="text-2xl sm:text-3xl font-bold text-gray-800">Task Details</h1>
         <button
           onClick={() => router.push('/tasks')}
-          className="text-blue-600 hover:text-blue-800 font-semibold"
+          className="text-sm sm:text-base text-blue-600 hover:text-blue-800 font-semibold"
         >
-          ← Back to List
+          ← Back
         </button>
       </div>
 
-      <div className="bg-white rounded-lg shadow-md p-6 mb-6">
+      <div className="bg-white rounded-lg shadow-md p-4 sm:p-6 mb-4 sm:mb-6">
         {!isEditing ? (
           // Read-only view
           <div className="space-y-4">
@@ -378,7 +378,7 @@ export default function TaskDetail() {
       </div>
 
       {/* Task Dependencies */}
-      <div className="bg-white rounded-lg shadow-md p-6 mb-6">
+      <div className="bg-white rounded-lg shadow-md p-4 sm:p-6 mb-4 sm:mb-6">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-xl font-bold text-gray-800">Task Dependencies</h2>
           <button
@@ -540,7 +540,7 @@ export default function TaskDetail() {
       </div>
 
       {/* Task History */}
-      <div className="bg-white rounded-lg shadow-md p-6">
+      <div className="bg-white rounded-lg shadow-md p-4 sm:p-6">
         <h2 className="text-xl font-bold text-gray-800 mb-4">Task History</h2>
         <div className="space-y-3">
           {history.length === 0 ? (

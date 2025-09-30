@@ -99,20 +99,20 @@ export default function TaskList() {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold text-gray-800">Task List</h1>
+    <div className="container mx-auto px-2 sm:px-4 py-4 sm:py-8">
+      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 sm:gap-0 mb-4 sm:mb-6">
+        <h1 className="text-2xl sm:text-3xl font-bold text-gray-800">Task List</h1>
         <Link
           href="/tasks/create"
-          className="bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
+          className="bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-700 transition-colors text-center"
         >
-          Create New Task
+          + Create Task
         </Link>
       </div>
 
       {/* Filters */}
-      <div className="bg-white rounded-lg shadow-md p-4 mb-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="bg-white rounded-lg shadow-md p-3 sm:p-4 mb-4 sm:mb-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">Search</label>
             <input
@@ -139,8 +139,8 @@ export default function TaskList() {
         </div>
       </div>
 
-      {/* Tasks Table */}
-      <div className="bg-white rounded-lg shadow-md overflow-hidden">
+      {/* Tasks Table - Desktop */}
+      <div className="hidden md:block bg-white rounded-lg shadow-md overflow-hidden">
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-50">
@@ -211,6 +211,42 @@ export default function TaskList() {
             </tbody>
           </table>
         </div>
+      </div>
+
+      {/* Tasks Cards - Mobile */}
+      <div className="md:hidden space-y-3">
+        {filteredTasks.length === 0 ? (
+          <div className="bg-white rounded-lg shadow-md p-6 text-center text-gray-500">
+            No tasks found
+          </div>
+        ) : (
+          filteredTasks.map((task) => (
+            <div
+              key={task.id}
+              onClick={() => router.push(`/tasks/${task.id}`)}
+              className="bg-white rounded-lg shadow-md p-4 active:bg-gray-50"
+            >
+              <div className="flex justify-between items-start mb-2">
+                <h3 className="font-semibold text-gray-900 flex-1">{task.title}</h3>
+                <span className="text-xs text-gray-500 ml-2">#{task.id}</span>
+              </div>
+              
+              <div className="flex flex-wrap items-center gap-2 mb-2">
+                <span className={`px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusColor(task.status)}`}>
+                  {task.status}
+                </span>
+                <span className={`px-2 py-1 text-xs font-semibold ${getPriorityColor(task.priority)}`}>
+                  {task.priority}
+                </span>
+              </div>
+
+              <div className="flex justify-between items-center text-xs text-gray-600">
+                <span>{getUserName(task.assigneeId)}</span>
+                <span>{formatDate(task.createdDate)}</span>
+              </div>
+            </div>
+          ))
+        )}
       </div>
     </div>
   );
